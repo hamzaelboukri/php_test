@@ -1,21 +1,31 @@
 <?php
 
 include 'conn.php';
-
+$Email="";
+$Password="";
  if($_SERVER["REQUEST_METHOD"] == "POST") {
-  $email=$_POST['email'];
-  $password=$_POST['password'];
+  $Email=$_POST['email'];
+  $Password=$_POST['password'];
 
   // if ($empty $email ) {
-  //   echo "enter email"
+  //   echo "Enter email"
   // }
   // if ($empty $password) {
-  //  echo "enter pasword"
+  //  echo "Enter pasword"
   // }
- $stmt = $conn->prepare("INSERT INTO userss (email,password) VALUES (?, ?)");
+
+ $stmt = $conn->prepare("INSERT INTO userss (email ,password) VALUES (?, ?)");
  $stmt->bind_param("ss");
 
+ if ($stmt->execute()) {
+  echo "22222";
+} else {
+  echo "dddd: " . $stmt->error;
+}
+
  $stmt->close();
+
+
 }
 
 
@@ -39,7 +49,7 @@ include 'conn.php';
 
 <input type="email" name="email" id="email" placeholder="Enter your email">
 <input type="password" name="password" id="password" placeholder="Enter your password">
-
+ <?php print_r($email)  ?>
 
 <select name="" id="">
 <option value="1">selectrole</option>
