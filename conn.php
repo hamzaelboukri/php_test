@@ -1,12 +1,14 @@
-<?php
-    $servername = "localhost";
-    $username = "root"; 
-    $password = ""; 
-    $dbname = "testphp";  
+page1:
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
+session_start();
 
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-?>
+$_SESSION['redirected'] = true;
+
+header('Location: ./addClub.php?clubID=' . $clubID . 'success');
+
+page2:
+session_start();
+if (isset($_SESSION['redirected']) && $_SESSION['redirected'] === true) {
+    $successMessage = "Club deleted successfully";
+    unset($_SESSION['redirected']);
+}
